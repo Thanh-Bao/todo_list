@@ -2,24 +2,42 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
-
 function App() {
   const [Account, editAcc] = useState({
     Username: 55,
     Password: 5
   });
-  const submitAccount = function (){
-    alert("User added successfully!"); 
-  
+  const submitAccount = async function () {
+    const abc = await fetch(
+      `https://mewingstar.deno.dev`
+      , {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(Account)
+      });
+  const abc1 = await abc.json();
   }
   function getUsername(event) {
-    console.log(Account.Username)
-    }
+    console.log(event.target.value)
+    editAcc({
+      ...Account,
+      Username: event.target.value
+    })
+  }
+  function getPassword(event) {
+    console.log(event.target.value)
+    editAcc({
+      ...Account,
+      Password: event.target.value
+    })
+  }
   return (<div>
     <div>Username </div>
-    <input onChange={getUsername}/> 
+    <input onChange={getUsername} value={Account.Username} />
     <div>Password </div>
-    <input value={Account.Password} /> <br></br>
+    <input onChange={getPassword} value={Account.Password} /> <br></br>
     <button onClick={submitAccount}>Submit</button>
   </div>
   );
