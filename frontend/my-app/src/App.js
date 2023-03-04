@@ -9,7 +9,7 @@ function App() {
   });
   const submitAccount = async function () {
     const abc = await fetch(
-      `https://mewingstar.deno.dev`
+      `http://127.0.0.1:8390/Acct`
       , {
           method: 'POST',
           headers: {
